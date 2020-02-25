@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  .main.container
+       h1 Users
+        br
+        br
+        table.table(style="background-color:rgba(0,0,0, .25)")
+          tr
+            th(style="color:white") ID
+            th(style="color:white") Name
+            th(style="color:white") Number
+            th(style="color:white") Email
+            th(style="color:white") Groups
+            th(style="color:white") Events
+            th(style="color:white") Options
+            each u in users
+              tr
+                td(style="color:white")= u._id
+                td(style="color:white")= u.name
+                td(style="color:white")= u.number
+                td(style="color:white")= u.email
+                td(style="color:white")= u.groups
+                td(style="color:white")= u.events
+                td
+                  button.btn.btn-logout(onclick="deleteUser('" + u._id + "')", style="margin-left: 5px") Delete

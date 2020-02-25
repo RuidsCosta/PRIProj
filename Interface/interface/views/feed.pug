@@ -1,0 +1,271 @@
+extends layout
+
+block content
+
+  <!-- The Modal Pub -->
+  div(class="modal" id="newPub")
+    div(class="modal-dialog").card
+      div(class="modal-content")
+      
+      <!-- Nova publicaçao -->
+        <!-- Modal Header -->
+        div(class="modal-header")
+          h4(class="modal-title") New Publication
+          button(type="button" class="close" data-dismiss="modal") &times
+        
+        <!-- Modal body -->
+        div(class="modal-body")
+          form(action='/feed/newPublication' method='POST' enctype="multipart/form-data")
+                div.form-group
+                  label(for='text' class='cols-sm-2 control-label') Title:
+                  input(type='text' placeholder='Mandatory' class='form-control' name='title' id='title')  
+                div.form-group
+                  label(for='text' class='cols-sm-2 control-label') Text:
+                  textarea(rows="4" cols="50" class='form-control' name='text' id='text')
+                div.form-group
+                  label(for='text' class='cols-sm-2 control-label') Tags:
+                  input(type='text' class='form-control' name='tags' id='tags')  
+                div.form-group
+                  label(for='sel1') Target (public or group/event):
+                  select(class='form-control' id='target' name='target')
+                    option(value='public') Public
+                    each g in userI.groups
+                      option(value=g)= g
+                    each e in userI.events
+                      option(value=e)=e
+                div.form-group
+                  .w3-container(id='lista')
+                    .w3-container(id='f1')
+                      .w3-cell-row
+                        label.w3-cell Description:
+                        input.w3-input.w3-cell.w3-border(type="text" name="desc")
+                      .w3-cell-row
+                        label.w3-cell File:
+                        input.w3-input.w3-cell(type="file" name="file")
+                  button.w3-button.w3-round-large.w3-indigo(id='mais1') +1
+                div.form-group
+                  button.btn.btn-primary(type='submit' style='width:100%;' ) Send
+        <!-- Modal footer -->
+        div(class="modal-footer")
+          button(type="button" class="btn btn-danger" data-dismiss="modal") Close
+
+  <!-- Novo evento -->     
+  <!-- The Modal Event -->
+  div(class="modal" id="newEvent")
+    div(class="modal-dialog")
+      div(class="modal-content")
+      
+        <!-- Modal Header -->
+        div(class="modal-header")
+          h4(class="modal-title") New Event
+          button(type="button" class="close" data-dismiss="modal") &times
+        
+        <!-- Modal body -->
+        div(class="modal-body")
+          form(action='/events/newEvent' method='POST')
+                div.form-group
+                    label(for='text' class='cols-sm-2 control-label') Name:
+                        input(type='text' placeholder='Mandatory' class='form-control' name='name' id='name')  
+                div.form-group
+                    label(for='text' class='cols-sm-2 control-label') Description:
+                        textarea(rows="4" cols="50" class='form-control' name='description' id='description')
+                h3 Start Date
+                div
+                  form-group
+                      label(for='text' class='cols-sm-2 control-label') Year:
+                          input(type='number' min='2020' class='form-control' name='startYear' id='startYear')
+                  b /
+                  form-group
+                      label(for='text' class='cols-sm-2 control-label') Month:
+                          input(type='number' min='1' max='12' class='form-control' name='startMonth' id='startMonth')
+                  b /
+                  form-group
+                      label(for='text' class='cols-sm-2 control-label') Day:
+                          input(type='number' min='1' max='31' class='form-control' name='startDay' id='startDay')
+                  b    
+                  form-group
+                      label(for='text' class='cols-sm-2 control-label') Hours:
+                          input(type='number' min='0' max='24' class='form-control' name='startHours' id='startHours')
+                  b :
+                  form-group
+                      label(for='text' class='cols-sm-2 control-label') Minutes:
+                          input(type='number' min='0' max='59' class='form-control' name='startMinutes' id='startMinutes')
+                h3 End Date
+                div
+                  form-group
+                      label(for='text' class='cols-sm-2 control-label') Year:
+                          input(type='number' min='2020' class='form-control' name='endYear' id='endYear')
+                  b /
+                  form-group
+                      label(for='text' class='cols-sm-2 control-label') Month:
+                          input(type='number' min='1' max='12' class='form-control' name='endMonth' id='endMonth')
+                  b /
+                  form-group
+                      label(for='text' class='cols-sm-2 control-label') Day:
+                          input(type='number' min='1' max='31' class='form-control' name='endDay' id='endDay')
+                  b    
+                  form-group
+                      label(for='text' class='cols-sm-2 control-label') Hours:
+                          input(type='number' min='0' max='24' class='form-control' name='endHours' id='endHours')
+                  b :
+                  form-group
+                      label(for='text' class='cols-sm-2 control-label') Minutes:
+                          input(type='number' min='0' max='59' class='form-control' name='endMinutes' id='endMinutes')
+
+                button.btn.btn-primary(type='submit' style='width:100%;') Send
+        <!-- Modal footer -->
+        div(class="modal-footer")
+          button(type="button" class="btn btn-danger" data-dismiss="modal") Close
+  
+  <!-- Novo grupo -->
+  <!-- The Modal Group -->
+  div(class="modal" id="newGroup")
+    div(class="modal-dialog")
+      div(class="modal-content")
+      
+        <!-- Modal Header -->
+        div(class="modal-header")
+          h4(class="modal-title") New Group
+          button(type="button" class="close" data-dismiss="modal") &times
+        
+        <!-- Modal body -->
+        div(class="modal-body")
+          form(action='/groups/newGroup' method='POST')
+            div.form-group
+                label(for='text' class='cols-sm-2 control-label') Name:
+                    input(type='text' placeholder='Mandatory' class='form-control' name='name' id='name')  
+            div.form-group
+                label(for='text' class='cols-sm-2 control-label') Description:
+                    textarea(rows="4" cols="50" class='form-control' name='description' id='description')
+            div.form-group
+                button.btn.btn-primary(type='submit' style='width:100%;') Send
+        <!-- Modal footer -->
+        div(class="modal-footer")
+          button(type="button" class="btn btn-danger" data-dismiss="modal") Close
+
+  <!-- Novo comentario -->
+  <!-- The Modal Group -->
+  div(class="modal" id="newComment")
+    div(class="modal-dialog")
+      div(class="modal-content")
+      
+        <!-- Modal Header -->
+        div(class="modal-header")
+          h4(class="modal-title") New Comment
+          button(type="button" class="close" data-dismiss="modal") &times
+        
+        <!-- Modal body -->
+        div(class="modal-body")
+          form(action='/feed/newComment' method='POST')
+            div.form-group
+              label(for='text' class='cols-sm-2 control-label') Publication ID:
+                <input type="text" name="myId" id="myId" value=""/>  
+            div.form-group
+                label(for='text' class='cols-sm-2 control-label') Comment:
+                    textarea(rows="5" cols="50" class='form-control' name='commentText' id='commentText')
+            div.form-group
+                button.btn.btn-primary(type='submit' style='width:100%;') Send
+        <!-- Modal footer -->
+        div(class="modal-footer")
+          button(type="button" class="btn btn-danger" data-dismiss="modal") Close
+
+  <!-- Feed -->
+  br
+  br
+  br
+  .container-fluid
+    .row
+      //perfil
+      .col-md-3
+        .card(style='margin-top: 1rem')
+          .card-block
+            h4.card-title
+              b=userI.name
+          ul.list-group.list-group-flush
+            li.list-group-item= '@' + userI.number
+          .card-block
+            a.card-link(href='/users/myProfile') 
+              b My Profile
+        img(src='https://i.imgur.com/HjUcbLu.png' style='max-width:94%; display: inline-block;' class='img-fluid')
+      //publicação      
+      .col-md-6.gedf-main
+        
+      
+        //feed
+        
+        each p in feed
+          if (userI.groups.includes(p.target) || userI.events.includes(p.target) || p.target == "public")
+            .card(style='margin-top: 1rem')
+              .card-header
+                .row
+                  .col-md-1
+                    img.rounded-circle(width='45', height='45', src='https://img.favpng.com/17/7/13/computer-icons-icon-design-user-png-favpng-uXME5zjHwHTJNs2Kzf5LvgFDR.jpg')
+                  .col-md-6
+                    .h5
+                      b= p.authorName
+                    .h7.text-muted(style='font-size: 0.8rem')='@' + p.author
+              .card-block
+                .h7.text-muted(style='font-size: 0.8rem; margin-bottom: 1rem')
+                  i.fa.fa-clock-o=p.date
+                  |
+                h5.card-title(style='color:#417aba')
+                  b=p.title
+                p.card-text=p.text
+                  |
+                each fi in p.files
+                  if(fi.split(".")[3] == "png" || fi.split(".")[3] == "jpg" || fi.split(".")[3] == "PNG" || fi.split(".")[3] == "JPEG")
+                    p.card=fi.split(".")[2].split("/")[3]+"."+fi.split(".")[3]
+                    a(href="/files/"+ fi.split(".")[2].split("/")[3]+"."+fi.split(".")[3]  download)
+                      img(height='20%' width='auto' src="/files/"+fi.split(".")[2].split("/")[3]+"."+fi.split(".")[3])
+                  else
+                    p.card=fi.split(".")[2].split("/")[3]+"."+fi.split(".")[3]
+                    p=fi
+                    a(href="/files/"+ fi.split(".")[2].split("/")[3]+"."+fi.split(".")[3] download)
+                      i(class='fas fa-save' style='font-size:48px;color:dark-grey')
+                hr
+                button.btn.btn-secondary(type='button' data-id=p._id class="open-AddId" data-toggle="modal" data-target="#newComment")
+                    i.fa.fa-comment
+                      |  Comment
+                ul.list-group.list-group-flush(style='margin-top: 1rem')
+                  each c in p.comments
+                    li.list-group-item
+                      .row
+                        .col-md-1
+                          img.rounded-circle(width='30', height='30', src='https://img.favpng.com/17/7/13/computer-icons-icon-design-user-png-favpng-uXME5zjHwHTJNs2Kzf5LvgFDR.jpg')
+                        .col
+                          .h7.text(style='font-size: 1rem')= '@' + c.commentAuthor
+                          .h7.text-muted(style='font-size: 1rem')= c.commentText
+                | 
+                .h7.text-muted(style='font-size: 0.7rem') 
+                  h7
+                    div
+                      b Tags: 
+                      h7= p.tags
+                  h7= '@' + p.target
+                  |
+      //grupos e eventos        
+      .col-md-3
+        .card(style='margin-top: 1rem')
+          .card-block
+              h4 
+                b Create
+          .list-group
+            button.list-group-item.list-group-item-action(type='button' data-toggle="modal" data-target="#newPub") Publication
+            button.list-group-item.list-group-item-action(type='button' data-toggle="modal" data-target="#newGroup") Group
+            button.list-group-item.list-group-item-action(type='button' data-toggle="modal" data-target="#newEvent") Event
+        .card(style='margin-top: 1rem')  
+          .card-block
+            h4
+              b Groups
+          .list-group
+            each g in userI.groups
+              a(href='/feed?group=' + g)
+                button.list-group-item.list-group-item-action(type='button')=g
+        .card(style='margin-top: 1rem')
+          .card-block
+            h4 
+              b Events
+          .list-group
+            each e in userI.events
+              a(href='/feed?event=' + e)
+                button.list-group-item.list-group-item-action(type='button')=e   

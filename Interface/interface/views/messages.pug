@@ -1,0 +1,20 @@
+extends layout
+
+block content
+
+  .main.container
+    h1 Messages
+      br
+      br
+      table.table(style="background-color:rgba(0,0,0, .25)")
+        tr
+          th(style="color:white") User
+          th(style="color:white") Options
+
+
+          each m in elem
+            tr
+              td(style="color:white")= m.split(' - ')[1]
+              td
+                a(href="/messages/from/"+ m.split(' - ')[0]) See Messages
+

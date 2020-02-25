@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  .main.container
+       h1 Events
+        br
+        br
+        table.table(style="background-color:rgba(0,0,0, .25)")
+          tr
+            th(style="color:white") Name
+            th(style="color:white") Description
+            th(style="color:white") Start Date
+            th(style="color:white") End Date
+            th(style="color:white") Options
+            each e in events
+              tr
+                td(style="color:white")= e.name
+                td(style="color:white")= e.description
+                td(style="color:white")= e.startDate
+                td(style="color:white")= e.endDate
+                td
+                  if userI.events.includes(e.name)
+                    button.btn.btn-logout(onclick="exitEvent('" + e._id + "')", style="margin-left: 5px") Exit
+                  else
+                    button.btn.btn-login(onclick="joinEvent('" + e._id + "')", style="margin-left: 5px") Join

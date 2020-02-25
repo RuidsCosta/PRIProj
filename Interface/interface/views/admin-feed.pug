@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  .main.container
+       h1 Publications
+        br
+        br
+        table.table(style="background-color:rgba(0,0,0, .25)")
+          tr
+            th(style="color:white") ID
+            th(style="color:white") Title
+            th(style="color:white") Text
+            th(style="color:white") Date
+            th(style="color:white") Filepath
+            th(style="color:white") File Mimetype
+            th(style="color:white") Tags
+            th(style="color:white") Author
+            th(style="color:white") Target
+            th(style="color:white") Options
+            each p in feed
+              tr
+                td(style="color:white")= p._id
+                td(style="color:white")= p.title
+                td(style="color:white")= p.text
+                td(style="color:white")= p.date
+                td(style="color:white")= p.filePath
+                td(style="color:white")= p.fileMimetype
+                td(style="color:white")= p.tags
+                td(style="color:white")= p.author
+                td(style="color:white")= p.target
+                td
+                  button.btn.btn-logout(onclick="deletePublication('" + p._id + "')", style="margin-left: 5px") Delete
+
+                  
+                
+        
